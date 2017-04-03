@@ -59,7 +59,7 @@ class PDFGenerator(object):
 
 
 	def get_content_file(self, filename):
-		return File(open(self.filepath), name=filename)
+		return File(open(self.filepath, mode='rb'), name=filename)
 
 
 	def get_data(self):
