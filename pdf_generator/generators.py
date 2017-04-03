@@ -59,7 +59,7 @@ class PDFGenerator(object):
 
 
 	def __set_pdf_data(self):
-		with open(self.filepath, encoding='utf-8') as pdf:
+		with open(self.filepath, encoding="latin-1") as pdf:
 			self.pdf_data = pdf.read()
 
 
