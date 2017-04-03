@@ -30,7 +30,6 @@ class PDFGenerator(object):
 		self.zoom = zoom
 		self.pdf_data = None
 		self.__generate()
-		self.__remove_source_file()
 
 
 	def __get_random_filename(self):
@@ -83,6 +82,7 @@ class PDFGenerator(object):
 			description=description,
 			document=file)
 		document.save()
+		self.__remove_source_file()
 		return document
 
 
