@@ -1,5 +1,6 @@
 import subprocess
 import os
+import codecs
 from django.core.validators import URLValidator
 from .settings import pdf_settings
 from django.http import (
