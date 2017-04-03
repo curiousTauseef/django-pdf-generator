@@ -10,6 +10,7 @@ from django.http import (
 from django.core.files.base import ContentFile
 from .models import PdfDoc
 from .utils import get_random_filename
+from django.core.files import File
 
 
 validate_url = URLValidator(schemes=['https', 'http'])
@@ -29,7 +30,6 @@ class PDFGenerator(object):
 		self.zoom = zoom
 		self.pdf_data = None
 		self.__generate()
-		self.__set_pdf_data()
 		self.__remove_source_file()
 
 
@@ -59,13 +59,8 @@ class PDFGenerator(object):
 		return subprocess.call(command)
 
 
-	def __set_pdf_data(self):
-		with codecs.open(self.filepath,encoding='utf-8', errors='replace') as pdf:
-			self.pdf_data = pdf.read()
-
-
 	def get_content_file(self, filename):
-		return ContentFile(self.pdf_data, name=filename)
+		return File(open(self.filepath), name=filename)
 
 
 	def get_data(self):
