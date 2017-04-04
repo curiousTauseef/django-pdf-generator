@@ -18,7 +18,7 @@ validate_url = URLValidator(schemes=['https', 'http'])
 class PDFGenerator(object):
 
 	def __init__(self, url, paperformat='A4', zoom=1, script=pdf_settings.DEFAULT_RASTERIZE_SCRIPT,
-				 temp_dir=pdf_settings.DEFAULT_TEMP_DIR):
+				 temp_dir=pdf_settings.DEFAULT_TEMP_DIR, header='', footer='', margin='0cm', orientation='portrait'):
 		validate_url(url)
 		self.script = script
 		self.temp_dir = temp_dir
@@ -28,6 +28,10 @@ class PDFGenerator(object):
 		self.paperformat = paperformat
 		self.zoom = zoom
 		self.pdf_data = None
+		self.header = header
+		self.footer = footer
+		self.margin = margin
+		self.orientation = orientation
 		self.__generate()
 		self.__set_pdf_data()
 		self.__remove_source_file()
@@ -54,6 +58,10 @@ class PDFGenerator(object):
 			self.url,
 			self.filepath,
 			self.paperformat,
+			self.header,
+			self.footer,
+			self.margin,
+			self.orientation,
 			str(self.zoom)
 		]
 		return subprocess.call(command)
